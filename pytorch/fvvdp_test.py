@@ -1,6 +1,6 @@
 
 
-from utils import load_mat_tensor
+from .utils import load_mat_tensor
 import torch
 import numpy as np
 import os

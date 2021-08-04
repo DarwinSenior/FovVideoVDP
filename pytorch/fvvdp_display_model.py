@@ -1,4 +1,5 @@
 import torch
+import torch.nn as nn
 import torch.nn.functional as Func
 import numpy as np 
 import math
@@ -15,7 +16,7 @@ def srgb2lin( p ):
     return L
 
 
-class fvvdp_display_photo_gog: 
+class fvvdp_display_photo_gog(nn.Module): 
     # Gain-gamma-offset display model to simulate SDR displays
     # Object variables:
     #  Y_peak - display peak luminance in cd/m^2
@@ -48,7 +49,7 @@ class fvvdp_display_photo_gog:
     #
     # Copyright (c) 2010-2021, Rafal Mantiuk
     def __init__( self, Y_peak, contrast = 1000, gamma = -1, E_ambient = 0, k_refl = 0.005 ):
-            
+        nn.Module.__init__(self) 
         self.Y_peak = Y_peak            
         self.contrast = contrast
         self.gamma = gamma

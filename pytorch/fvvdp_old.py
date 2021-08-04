@@ -13,13 +13,11 @@ import torch.utils.benchmark as torchbench
 
 from PIL import Image
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-from third_party.cpuinfo import cpuinfo
-from hdrvdp_lpyr_dec import hdrvdp_lpyr_dec
-from interp import interp1, interp3
-from utils import *
-from fvvdp_test import FovVideoVDP_Testbench
+from .third_party.cpuinfo import cpuinfo
+from .hdrvdp_lpyr_dec import hdrvdp_lpyr_dec
+from .interp import interp1, interp3
+from .utils import *
+from .fvvdp_test import FovVideoVDP_Testbench
 
 class DisplayModel():
     def __init__(self, W, H, diagonal_fov_degrees, distance_m, diag_size_m, min_luminance, max_luminance, gamma_func, rgb2X, rgb2Y, rgb2Z):

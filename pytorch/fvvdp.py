@@ -15,13 +15,12 @@ import logging
 
 from PIL import Image
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-
-from third_party.cpuinfo import cpuinfo
-from hdrvdp_lpyr_dec import hdrvdp_lpyr_dec
-from interp import interp1, interp3
-from utils import *
-from fvvdp_test import FovVideoVDP_Testbench
+from .third_party.cpuinfo import cpuinfo
+from .hdrvdp_lpyr_dec import hdrvdp_lpyr_dec
+from .interp import interp1, interp3
+from .utils import *
+from .fvvdp_test import FovVideoVDP_Testbench
+from . import fvvdp_data as data
 
 class DisplayModel():
     def __init__(self, W, H, diagonal_fov_degrees, distance_m, diag_size_m, min_luminance, max_luminance, gamma_func, rgb2X, rgb2Y, rgb2Z):
@@ -77,8 +76,10 @@ class DisplayModel():
         obj = cls.__new__(cls)
         obj.display_name = model_name
 
-        models = json2dict(models_file)
-        colorspaces = json2dict(colorspaces_file)
+        #  models = json2dict(models_file)
+        models = data.display_models
+        #  colorspaces = json2dict(colorspaces_file)
+        colorspaces = data.color_spaces
 
         if color_space_name is None or color_space_name not in colorspaces:
             color_space_name = "sRGB"
@@ -426,11 +427,12 @@ class FovVideoVDP(torch.nn.Module):
              do_foveated=False, # changed default foveation to False to match Matlab implementation
              device=torch.device('cpu') ):
 
-        parameters_file = os.path.join(os.path.dirname(__file__), "../fvvdp_data/fvvdp_parameters.json")
+        #  parameters_file = os.path.join(os.path.dirname(__file__), "../fvvdp_data/fvvdp_parameters.json")
 
         obj = cls.__new__(cls)
 
-        parameters = json2dict(parameters_file)
+        #  parameters = json2dict(parameters_file)
+        parameter = data.fvvdp_parameters
 
         #all common parameters between Matlab and Pytorch, loaded from the .json file
         mask_p = parameters['mask_p']

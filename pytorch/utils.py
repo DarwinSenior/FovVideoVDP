@@ -1,6 +1,6 @@
 
 import os
-from third_party.loadmat import loadmat
+from .third_party.loadmat import loadmat
 import torch
 import numpy as np
 import json
